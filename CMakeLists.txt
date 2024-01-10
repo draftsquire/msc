@@ -60,7 +60,8 @@ include_directories(
 add_definitions(-DDEBUG -DUSE_HAL_DRIVER -DSTM32F401xE)
 
 file(GLOB_RECURSE SOURCES "Core/*.*" "Drivers/*.*"
-#        "source/*.*"
+        "source/motor.c"
+        "source/app_main.c"
 )
 
 set(LINKER_SCRIPT ${CMAKE_SOURCE_DIR}/STM32F401RETX_FLASH.ld)

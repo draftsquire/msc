@@ -12,8 +12,8 @@ motor_gpio motor_1_step = {
         .GPIO_Pin = GPIO_PIN_10
 };
 motor_gpio motor_1_dir = {
-        .GPIOx = GPIOA,
-        .GPIO_Pin = GPIO_PIN_6
+        .GPIOx = GPIOB,
+        .GPIO_Pin = GPIO_PIN_3
 };
 static motor motor_2 = {0};
 motor_gpio motor_2_step = {
@@ -21,8 +21,8 @@ motor_gpio motor_2_step = {
         .GPIO_Pin = GPIO_PIN_5
 };
 motor_gpio motor_2_dir = {
-        .GPIOx = GPIOA,
-        .GPIO_Pin = GPIO_PIN_5
+        .GPIOx = GPIOB,
+        .GPIO_Pin = GPIO_PIN_4
 };
 static motor motor_3 = {0};
 motor_gpio motor_3_step = {
@@ -45,7 +45,8 @@ motor_gpio motor_4_dir = {
 
 extern UART_HandleTypeDef huart2;
 /// \brief Буффер для даных, полученых с USB-UART
-static uint8_t uart_data_buffer[8];
+uint8_t uart_data_buffer[8] = {0};
+const char* rx_confirm = "recieved.\n";
 
 
 ///// \brief Функция - callback по приёму сообщения по UART
@@ -53,6 +54,9 @@ void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart)
 {
     if (huart->Instance == USART2)
     {
+        // Шлём подтверждение
+
+        HAL_UART_Transmit_IT(&huart2, (uint8_t*)rx_confirm ,sizeof(rx_confirm));
         // USART2 завершил прием данных, снова начинаем приём
         HAL_UART_Receive_IT(&huart2, uart_data_buffer, sizeof(uart_data_buffer));
     }
@@ -78,10 +82,10 @@ void app_main(){
 //    HAL_UART_Receive_IT(&huart2, uart_data_buffer, sizeof(uart_data_buffer));
 
     while (1) {
-        move_motor(&motor_1, uart_data_buffer[0], uart_data_buffer[4]);// Слева скорость (0-255), справа направление (0-1)
-        move_motor(&motor_1, uart_data_buffer[1], uart_data_buffer[5]);// Слева скорость (0-255), справа направление (0-1)
-        move_motor(&motor_1, uart_data_buffer[2], uart_data_buffer[6]);// Слева скорость (0-255), справа направление (0-1)
-        move_motor(&motor_1, uart_data_buffer[3], uart_data_buffer[7]);// Слева скорость (0-255), справа направление (0-1)
+        move_motor(&motor_1, 250, true);// Слева скорость (0-255), справа направление (0-1)
+        move_motor(&motor_2, uart_data_buffer[1], uart_data_buffer[5]);// Слева скорость (0-255), справа направление (0-1)
+        move_motor(&motor_3, uart_data_buffer[2], uart_data_buffer[6]);// Слева скорость (0-255), справа направление (0-1)
+        move_motor(&motor_4, uart_data_buffer[3], uart_data_buffer[7]);// Слева скорость (0-255), справа направление (0-1)
 
 
     }

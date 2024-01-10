@@ -6,7 +6,7 @@
 #include <stdint.h>
 #include <stdbool.h>
 #include <math.h>
-#include <motor.h>
+#include "motor.h"
 
 //static struct {
 //    void gpio_write_pin(GPIO_TypeDef* GPIOx, uint16_t GPIO_Pin, GPIO_PinState PinState)
@@ -47,10 +47,9 @@ static uint32_t speed_map(uint8_t speed, int32_t max_t, int32_t min_t) {
 ///
 void move_motor(motor* motor, uint8_t speed, bool direction) {
 
-    if (motor->direction != direction) {
-        motor->direction = direction;
-        HAL_GPIO_WritePin(motor->direction_pin.GPIOx, motor->direction_pin.GPIO_Pin, (direction) ? GPIO_PIN_SET : GPIO_PIN_RESET);
-    }
+
+    HAL_GPIO_WritePin(motor->direction_pin.GPIOx, motor->direction_pin.GPIO_Pin, (direction) ? GPIO_PIN_SET : GPIO_PIN_RESET);
+
     if (speed!=0) {
         motor->delay_time = speed_map(speed, motor->max_t, motor->min_t);
         // motor->current_time = micros();
