@@ -43,45 +43,7 @@
 UART_HandleTypeDef huart2;
 
 /* USER CODE BEGIN PV */
-//static motor motor_1 = {0};
-//motor_gpio motor_1_step = {
-//        .GPIOx = GPIOA,
-//        .GPIO_Pin = GPIO_PIN_10
-//};
-//motor_gpio motor_1_dir = {
-//        .GPIOx = GPIOA,
-//        .GPIO_Pin = GPIO_PIN_6
-//};
-//static motor motor_2 = {0};
-//motor_gpio motor_2_step = {
-//        .GPIOx = GPIOB,
-//        .GPIO_Pin = GPIO_PIN_5
-//};
-//motor_gpio motor_2_dir = {
-//        .GPIOx = GPIOA,
-//        .GPIO_Pin = GPIO_PIN_5
-//};
-//static motor motor_3 = {0};
-//motor_gpio motor_3_step = {
-//        .GPIOx = GPIOB,
-//        .GPIO_Pin = GPIO_PIN_10
-//};
-//motor_gpio motor_3_dir = {
-//        .GPIOx = GPIOA,
-//        .GPIO_Pin = GPIO_PIN_8
-//};
-//static motor motor_4 = {0};
-//motor_gpio motor_4_step = {
-//        .GPIOx = GPIOA,
-//        .GPIO_Pin = GPIO_PIN_9
-//};
-//motor_gpio motor_4_dir = {
-//        .GPIOx = GPIOC,
-//        .GPIO_Pin = GPIO_PIN_7
-//};
-//
-//static uint8_t uart_data_buffer[8];
-//const char* rx_confirm = "recieved.\n";
+
 
 /* USER CODE END PV */
 
@@ -95,18 +57,7 @@ static void MX_USART2_UART_Init(void);
 
 /* Private user code ---------------------------------------------------------*/
 /* USER CODE BEGIN 0 */
-///// \brief Функция - callback по приёму сообщения по UART
-//void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart)
-//{
-//    if (huart->Instance == USART2)
-//    {
-//        // Переотправляем те же данные в качестве подтверждения
-//
-//        HAL_UART_Transmit_IT(&huart2, (uint8_t*)rx_confirm ,sizeof(rx_confirm));
-//        // USART2 завершил прием данных, снова начинаем приём
-//        HAL_UART_Receive_IT(&huart2, uart_data_buffer, sizeof(uint8_t)*8);
-//    }
-//}
+
 /* USER CODE END 0 */
 
 /**
@@ -139,16 +90,7 @@ int main(void)
   MX_GPIO_Init();
   MX_USART2_UART_Init();
   /* USER CODE BEGIN 2 */
-//  motor_init(motor_1_dir, motor_1_step, 0, true, &motor_1);
-//
-//  motor_init(motor_2_dir, motor_2_step, 0, true, &motor_2);
-//
-//  motor_init(motor_3_dir, motor_3_step, 0, true, &motor_3);
-//
-//  motor_init(motor_4_dir, motor_4_step, 0, true, &motor_4);
 
-//    /// \brief Первично запускаем приём по прерыванию
-//    HAL_UART_Receive_IT(&huart2, uart_data_buffer, sizeof(uart_data_buffer));
   /* USER CODE END 2 */
 
   /* Infinite loop */
@@ -156,10 +98,7 @@ int main(void)
   app_main();
   while (1)
   {
-//      move_motor(&motor_1, uart_data_buffer[0], uart_data_buffer[4]);// Слева скорость (0-255), справа направление (0-1)
-//      move_motor(&motor_1, uart_data_buffer[1], uart_data_buffer[5]);// Слева скорость (0-255), справа направление (0-1)
-//      move_motor(&motor_1, uart_data_buffer[2], uart_data_buffer[6]);// Слева скорость (0-255), справа направление (0-1)
-//      move_motor(&motor_1, uart_data_buffer[3], uart_data_buffer[7]);// Слева скорость (0-255), справа направление (0-1)
+
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */

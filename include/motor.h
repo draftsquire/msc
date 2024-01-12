@@ -9,6 +9,8 @@
 
 ///TODO: Все зависимости от HAL прокидывать в виде инъекций!
 #include <stm32f4xx_hal.h>
+#include <stdbool.h>
+
 
 /// \struct motor_gpio
 /// \struct Структура для объединения структуры порта и номера пина
@@ -28,9 +30,6 @@ typedef struct {
     uint32_t previous_time;
     uint32_t current_time;
     uint32_t delay_time;
-    uint32_t speed_map;
-    int32_t max_t;
-    int32_t min_t;
 } motor;
 
 /// \brief - Функция инициализации мотора (ШД)
@@ -39,11 +38,9 @@ typedef struct {
 /// \param[in] step_pin - Пин управления шагом
 /// \param[in] init_speed - Начальная скорость [0-255]
 /// \param[in] init_dir - Начальное направление [true - вперёдб false -назад]
-/// \param[in] min_t -
-/// \param[in] max_t -
 /// \param[out] motor
 /// \return
-int32_t motor_init(motor_gpio dir_pin, motor_gpio step_pin, uint8_t init_speed, bool init_dir, int32_t min_t, int32_t max_t, motor* motor);
+int32_t motor_init(motor_gpio dir_pin, motor_gpio step_pin, uint8_t init_speed, bool init_dir, motor* motor);
 
 /// \brief Функция для запуска двигателя с определённой скоростью и направлением
 ///

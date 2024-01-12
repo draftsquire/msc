@@ -65,18 +65,10 @@ void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart)
 /// \brief Основная функция рабочей программы,содержит в себе бесконечный цикл
 void app_main(){
 
-    if( motor_init(motor_1_dir, motor_1_step, 0, true, 0, 0, &motor_1)) {
-//        Error_Handler();
-    }
-    if( motor_init(motor_2_dir, motor_2_step, 0, true, 0, 0,  &motor_2)) {
-//        Error_Handler();
-    }
-    if( motor_init(motor_3_dir, motor_3_step, 0, true, 0, 0,  &motor_3)) {
-//        Error_Handler();
-    }
-    if( motor_init(motor_4_dir, motor_4_step, 0, true, 0, 0,  &motor_4)) {
-//        Error_Handler();
-    }
+    motor_init(motor_1_dir, motor_1_step, 0, true, &motor_1);
+    motor_init(motor_2_dir, motor_2_step, 0, true, &motor_2);
+    motor_init(motor_3_dir, motor_3_step, 0, true, &motor_3);
+    motor_init(motor_4_dir, motor_4_step, 0, true, &motor_4);
 
 //    /// \brief Первично запускаем приём по прерыванию
     HAL_UART_Receive_IT(&huart2, uart_data_buffer, sizeof(uart_data_buffer));
