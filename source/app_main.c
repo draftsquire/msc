@@ -79,7 +79,7 @@ void app_main(){
     }
 
 //    /// \brief Первично запускаем приём по прерыванию
-//    HAL_UART_Receive_IT(&huart2, uart_data_buffer, sizeof(uart_data_buffer));
+    HAL_UART_Receive_IT(&huart2, uart_data_buffer, sizeof(uart_data_buffer));
 
     while (1) {
         move_motor(&motor_1, uart_data_buffer[0], uart_data_buffer[4]);// Слева скорость (0-255), справа направление (0-1)
