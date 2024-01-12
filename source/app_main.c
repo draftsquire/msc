@@ -68,13 +68,13 @@ void app_main(){
     if( motor_init(motor_1_dir, motor_1_step, 0, true, &motor_1)) {
 //        Error_Handler();
     }
-    if( motor_init(motor_2_dir, motor_2_step, 50, true, &motor_2)) {
+    if( motor_init(motor_2_dir, motor_2_step, 0, true, &motor_2)) {
 //        Error_Handler();
     }
-    if( motor_init(motor_3_dir, motor_3_step, 100, true, &motor_3)) {
+    if( motor_init(motor_3_dir, motor_3_step, 0, true, &motor_3)) {
 //        Error_Handler();
     }
-    if( motor_init(motor_4_dir, motor_4_step, 200, true, &motor_4)) {
+    if( motor_init(motor_4_dir, motor_4_step, 0, true, &motor_4)) {
 //        Error_Handler();
     }
 
@@ -82,7 +82,7 @@ void app_main(){
 //    HAL_UART_Receive_IT(&huart2, uart_data_buffer, sizeof(uart_data_buffer));
 
     while (1) {
-        move_motor(&motor_1, 250, true);// Слева скорость (0-255), справа направление (0-1)
+        move_motor(&motor_1, uart_data_buffer[0], uart_data_buffer[4]);// Слева скорость (0-255), справа направление (0-1)
         move_motor(&motor_2, uart_data_buffer[1], uart_data_buffer[5]);// Слева скорость (0-255), справа направление (0-1)
         move_motor(&motor_3, uart_data_buffer[2], uart_data_buffer[6]);// Слева скорость (0-255), справа направление (0-1)
         move_motor(&motor_4, uart_data_buffer[3], uart_data_buffer[7]);// Слева скорость (0-255), справа направление (0-1)
