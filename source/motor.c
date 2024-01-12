@@ -17,11 +17,12 @@
 /// \param[in] dir_pin - Пин направления
 /// \param[in] step_pin - Пин управления шагом
 /// \param[in] init_speed - Начальная скорость [0-255]
-/// \param[in] init_dir - Начальное направление [true - вперёд, false -назад]
-/// \param[in/out] motor - Структура описания мотора. Память должна быть выделена пользователем предварительно.
-///
-/// \return 0 - Ок, иначе - один из параметров NULL или некорректно задан
-int32_t motor_init(motor_gpio dir_pin, motor_gpio step_pin, uint8_t init_speed, bool init_dir, motor* motor) {
+/// \param[in] init_dir - Начальное направление [true - вперёдб false -назад]
+/// \param[in] min_t -
+/// \param[in] max_t -
+/// \param[out] motor
+/// \return
+int32_t motor_init(motor_gpio dir_pin, motor_gpio step_pin, uint8_t init_speed, bool init_dir, int32_t min_t, int32_t max_t, motor* motor) {
     if ((dir_pin.GPIOx == NULL) || (step_pin.GPIOx == NULL) || motor == NULL) {
         return -1;
     }
@@ -31,6 +32,8 @@ int32_t motor_init(motor_gpio dir_pin, motor_gpio step_pin, uint8_t init_speed, 
     HAL_GPIO_WritePin(dir_pin.GPIOx, dir_pin.GPIO_Pin, GPIO_PIN_SET);
     motor->speed = init_speed;
     motor->direction = init_dir;
+    motor->max_t = max_t;
+    motor->min_t = min_t;
     return 0;
 }
 
@@ -52,7 +55,7 @@ void move_motor(motor* motor, uint8_t speed, bool direction) {
 
     if (speed!=0) {
         motor->delay_time = speed_map(speed, motor->max_t, motor->min_t);
-        // motor->current_time = micros();
+
         /// \warning Хз, как реализована функция micros() в Arduino, предположительно можно заменить на ниженаписанное.
         motor->current_time = HAL_GetTick() / 1000;
         if (motor->current_time - motor->previous_time >= motor->delay_time) {
